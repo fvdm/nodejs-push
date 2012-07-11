@@ -6,7 +6,7 @@
 	},
 	"name": "push-node",
 	"description": "Access the Push4 / App Notifications API (http://www.appnotifications.com/)",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"homepage": "https://github.com/fvdm/nodejs-push",
 	"repository": {
 		"type": "git",
