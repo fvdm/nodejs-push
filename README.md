@@ -44,11 +44,11 @@ apn.api.credential = 'my API secret'
 apn.account.notify(
 	{
 		message: 'Alert message',
-		long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
+		action_loc_key: 'Alert Button'
 		title: 'Subject line',
 		subtitle: 'Below the subject',
+		long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
 		long_message_preview: 'Preview text',
-		action_loc_key: 'Alert Button'
 	},
 	console.log
 )
