@@ -4,6 +4,10 @@ Push4 / App Notifications API module for [Node.js](http://nodejs.org/).
 
 To use this module you need an account at [AppNotifications.com](http://www.appnotifications.com/). To access your account details and push to yourself you need the *API credential* code which you find in your [account settings](http://www.appnotifications.com/account/edit).
 
+## This is BETA software
+
+Described methods and their callbacks may change until v1.0.0 is released.
+
 ## Installation
 
 Either get and load the code from Github:
