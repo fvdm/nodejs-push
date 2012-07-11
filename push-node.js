@@ -127,7 +127,7 @@ app.talk = function( type, path, fields, cb ) {
 		method:		type,
 		headers: {
 			'Accept':		'application/json',
-			'User-Agent':	'4push.js (https://github.com/fvdm/nodejs-4push)'
+			'User-Agent':	'push-node.js (https://github.com/fvdm/nodejs-4push)'
 		},
 		agent:		false
 	}
