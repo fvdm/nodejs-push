@@ -70,6 +70,97 @@ Output:
   display_ads: false }
 ```
 
+## Account
+
+Access methods for a user.
+
+## account.settings
+### ( callback )
+
+The user account details and settings.
+
+```js
+apn.account.settings( console.log )
+```
+```js
+{ fb_push_command: 0,
+  facebook_paid: true,
+  force_twitter_client: true,
+  twitter_sound: 'S',
+  unlocked: true,
+  weekend_silent_mode_at: '2000/01/02 23:00:00 +0000',
+  facebook_sound: '' }
+```
+
+## account.notify
+### ( vars, callback )
+
+Send a notification to the user.
+
+```js
+apn.account.notify(
+	{
+		message: 'Alert message',
+		long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
+		title: 'Subject line',
+		subtitle: 'Below the subject',
+		long_message_preview: 'Preview text',
+		action_loc_key: 'Alert Button'
+	},
+	console.log
+)
+```
+```js
+{ title: 'Subject line',
+  message_level: 0,
+  long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
+  long_message_preview: 'Preview text',
+  subtitle: 'Below the subject',
+  send_at: '2012/07/11 19:27:00 +0000',
+  id: 12345,
+  favorite: false,
+  hasread: false,
+  message: 'Alert message',
+  display_ads: false }
+```
+
+## account.notifications
+### ( callback )
+
+Get a list (array) of notifications from the server.
+
+```js
+apn.account.notifications( console.log )
+```
+```js
+[ { thread_id: null,
+    title: 'Subject line',
+    send_at: '2012/07/11 19:34:15 +0000',
+    app_id: null,
+    long_message_preview: 'Preview text',
+    subtitle: 'Below the subject',
+    icon_url: null,
+    id: 50103867 },
+  { thread_id: null,
+    title: 'Subject line',
+    send_at: '2012/07/11 19:34:12 +0000',
+    app_id: null,
+    long_message_preview: 'Preview text',
+    subtitle: 'Below the subject',
+    icon_url: null,
+    id: 50103866 } ]
+```
+
+## account.feeds
+### ( callback )
+
+Get a list (array) of subscribed RSS feeds.
+
+```js
+apn.account.feeds( console.log )
+```
+
+
 ## Unlicense
 
 This is free and unencumbered software released into the public domain.
