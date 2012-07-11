@@ -37,18 +37,24 @@ var	https = require('https'),
 
 var app = new EventEmitter
 
+
+// defaults
 app.api = {
 	credential: false
 }
 
 
+// Account
 app.account = {
+	
+	// Subscribed feeds
 	feeds: function( cb ) {
 		app.talk( 'GET', 'account/feeds', function( result ) {
 			cb( result )
 		})
 	},
 	
+	// Send notification
 	notify: function( vars, cb ) {
 		var set = {}
 		for( var key in vars ) {
@@ -59,12 +65,14 @@ app.account = {
 		})
 	},
 	
+	// List notifications
 	notifications: function( cb ) {
 		app.talk( 'GET', 'account/notifications', function( result ) {
 			cb( result.notifications )
 		})
 	},
 	
+	// Get account settings
 	settings: function( cb ) {
 		app.talk( 'GET', 'account/notifications', function( result, head ) {
 			cb( result.user )
