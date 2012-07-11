@@ -1,0 +1,32 @@
+{
+	"author": {
+		"name": "Franklin van de Meent",
+		"email": "fr@nkl.in",
+		"url": "http://frankl.in"
+	},
+	"name": "push-node",
+	"description": "Access the Push4 / App Notifications API (http://www.appnotifications.com/)",
+	"version": "0.1.0",
+	"homepage": "https://github.com/fvdm/nodejs-push",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/fvdm/nodejs-push.git"
+	},
+	"bugs": {
+		"url": "https://github.com/fvdm/nodejs-push/issues"
+	},
+	"main": "push-node.js",
+	"dependencies": {},
+	"devDependencies": {},
+	"optionalDependencies": {},
+	"engines": {
+		"node": "*"
+	},
+	"tags": [
+		"4push",
+		"push4",
+		"middleware",
+		"api",
+		"appnotifications"
+	]
+}
