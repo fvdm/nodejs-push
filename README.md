@@ -164,6 +164,22 @@ Get a list (array) of subscribed RSS feeds.
 apn.account.feeds( console.log )
 ```
 
+## Events
+
+The module emits some events to catch trouble away from the methods. Useful for debugging, logging, API outages, etc.
+
+## api-error
+### ( reasonObject )
+
+Every time an API call returns a HTTP status code >= 300 this event is triggered. The **reasonObject** contains details about the request and response.
+
+```js
+apn.on( 'api-error', function( reason ) {
+	console.log( 'API error:' )
+	console.log( reason )
+})
+```
+
 
 ## Unlicense
 
