@@ -155,6 +155,18 @@ apn.account.notifications( console.log )
     id: 50103866 } ]
 ```
 
+## account.destroyall
+### ( callback )
+
+Delete all notifications from the server. This won't touch the device(s) as they use a local cache.
+
+```js
+apn.account.destroyall( console.log )
+```
+```js
+{ Response: { OK: 'OK' } }
+```
+
 ## account.feeds
 ### ( callback )
 

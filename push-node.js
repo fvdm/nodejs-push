@@ -71,6 +71,13 @@ app.account = {
 			cb( result.notifications )
 		})
 	},
+		
+	// Delete all notifications from the server
+	destroyall: function( cb ) {
+		app.talk( 'DELETE', 'account/notifications/destroy_all', function( result ) {
+			cb( result )
+		})
+	},
 	
 	// Get account settings
 	settings: function( cb ) {
