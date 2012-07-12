@@ -91,7 +91,7 @@ app.talk = function( type, path, fields, cb ) {
 	var path = '/'+ path +'.json'
 	
 	// query string
-	var body = false
+	var body = null
 	if( type == 'GET' ) {
 		
 		// GET
@@ -120,6 +120,7 @@ app.talk = function( type, path, fields, cb ) {
 		
 	}
 	
+	// build request
 	var options = {
 		host:		'www.appnotifications.com',
 		port:		443,
@@ -132,23 +133,32 @@ app.talk = function( type, path, fields, cb ) {
 		agent:		false
 	}
 	
+	// do request
 	var req = https.request( options, function( response ) {
+		
+		// response
 		response.setEncoding('utf8')
 		var data = ''
+		
 		response.on( 'data', function( chunk ) { data += chunk })
 		response.on( 'end', function() {
 			
+			// cleanup response
 			data = data.replace( /(^[\r\n\s\t ]+|[\r\n\s\t ]+$)/g, '' )
 			data = data.match( /^\{.*\}$/ ) ? JSON.parse( data ) : {}
+			
+			// do callback
 			cb( data, response.headers )
 			
 		})
 	})
 	
+	// POST body
 	if( body ) {
 		req.write( body )
 	}
 	
+	// close connection
 	req.end()
 }
 
