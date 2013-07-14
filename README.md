@@ -129,6 +129,22 @@ apn.account.notify(
   display_ads: false }
 ```
 
+#### Fields
+
+	message                Alert message text
+	action_loc_key         Alert button text
+	title                  Subject line
+	subtitle               Below the subject
+	long_message           HTML message content
+	                       (also in preview if long_message_preview is not set)
+	long_message_preview   Preview text
+	run_command            URL to open on 'action_loc_key' button
+	silent                 No alert window, just increase badge number
+	message_level          Importance, -2 to 2
+	sound                  Alert sound ID, see https://gist.github.com/penso/1217045
+	icon_url               Notification icon URL
+
+
 ## account.notifications
 ### ( callback )
 
