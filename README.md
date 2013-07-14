@@ -53,6 +53,7 @@ apn.account.notify(
 		subtitle: 'Below the subject',
 		long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
 		long_message_preview: 'Preview text',
+		run_command: 'http://example.net/12345'
 	},
 	console.log
 )
