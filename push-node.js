@@ -142,4 +142,8 @@ app.talk = function( type, path, fields, cb ) {
   req.end( body )
 }
 
-module.exports = app
+// ! Setup
+module.exports = function( token ) {
+  app.api.credential = token
+  return app
+}
