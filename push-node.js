@@ -127,10 +127,10 @@ app.talk = function( type, path, fields, cb ) {
   }
 
   // do request
-  var req = https.request( options, function( response ) {
+  var req = https.request( options )
 
-    // response
-    response.setEncoding('utf8')
+  // response
+  req.on( 'response', function( response ) {
     var data = ''
 
     response.on( 'data', function( chunk ) { data += chunk })
