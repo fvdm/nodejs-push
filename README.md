@@ -31,13 +31,11 @@ which can be found in your [account](http://api.faast.io/account/api_token).
 Send a notification to yourself.
 
 ```js
-var apn = require('push-node')
-
-// authenticate
-apn.api.credential = 'my API secret'
+// setup
+var faast = require('push-node')( 'API token' )
 
 // notify
-apn.account.notify(
+faast.account.notify(
   {
     message: 'Alert message',
     action_loc_key: 'Alert Button'
@@ -58,7 +56,7 @@ account.settings ( callback )
 The user account details and settings.
 
 ```js
-apn.account.settings( console.log )
+faast.account.settings( console.log )
 ```
 
 #### Output
@@ -80,7 +78,7 @@ account.notify ( vars, callback )
 Send a notification to the user.
 
 ```js
-apn.account.notify(
+faast.account.notify(
   {
     message: 'Alert message',
     long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
@@ -134,7 +132,7 @@ account.notifications ( callback )
 Get a list (array) of notifications from the server.
 
 ```js
-apn.account.notifications( console.log )
+faast.account.notifications( console.log )
 ```
 
 #### Output
@@ -166,7 +164,7 @@ Delete all notifications from the server.
 This won't touch the device(s) as they use a local cache.
 
 ```js
-apn.account.destroyall( console.log )
+faast.account.destroyall( console.log )
 ```
 
 #### Output
@@ -182,7 +180,7 @@ account.feeds ( callback )
 Get a list (array) of subscribed RSS feeds.
 
 ```js
-apn.account.feeds( console.log )
+faast.account.feeds( console.log )
 ```
 
 
