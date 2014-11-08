@@ -74,6 +74,14 @@ app.talk = function( type, path, fields, cb ) {
 
   // build path
   var path = '/'+ path +'.json'
+  // prevent multiple callbacks
+  var complete = false
+  function doCallback( err, data ) {
+    if( !complete ) {
+      complete = true
+      cb( err, data || null )
+    }
+  }
 
   // query string
   var body = null
@@ -139,7 +147,7 @@ app.talk = function( type, path, fields, cb ) {
         error.body = data
       }
 
-      cb( error, data )
+      doCallback( error, data )
     })
   })
 
