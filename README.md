@@ -1,38 +1,30 @@
-# nodejs-push
+nodejs-push
+===========
 
-Push4 / App Notifications API module for [Node.js](http://nodejs.org/).
+Faast push notification API module for [node.js](http://nodejs.org/).
 
-To use this module you need an account at [AppNotifications.com](http://www.appnotifications.com/). To access your account details and push to yourself you need the *API credential* code which you find in your [account settings](http://www.appnotifications.com/account/edit).
+To use this module you need an account at [Faast](http://faast.io/)
+and set the *API token* from your [account](http://api.faast.io/account/api_token).
 
-## This is BETA software
 
-Described methods and their callbacks may change until v1.0.0 is released.
+Installation
+------------
 
-## Installation
+Normal install:
 
-Either get and load the code from Github:
+`npm install push-node`
 
-```sh
-git clone https://github.com/fvdm/nodejs-push.git
-```
+Or the latest version from Github, can be unstable:
 
-```js
-var apn = require('./nodejs-push')
-```
+`npm install git+https://github.com/fvdm/nodejs-push`
 
-Or install via [NPM](http://search.npmjs.org/) and load the code from wherever your modules are installed:
 
-```sh
-npm install push-node
-```
+Usage
+-----
 
-```js
-var apn = require('push-node')
-```
+For the methods below you need to set the **api.credential**,
+which can be found in your [account](http://api.faast.io/account/api_token).
 
-## Usage
-
-For now, while still beta, you can only access methods for your own account. For example, sending notifications to yourself or retrieving the list of notifications. To do this you need to set the **api.credential** setting, which can be found in your [account settings](http://www.appnotifications.com/account/edit).
 
 ### Example
 
@@ -59,7 +51,7 @@ apn.account.notify(
 )
 ```
 
-Output:
+#### Output
 
 ```js
 { title: 'Subject line',
@@ -75,18 +67,18 @@ Output:
   display_ads: false }
 ```
 
-## Account
 
-Access methods for a user.
-
-## account.settings
-### ( callback )
+account.settings ( callback )
+----------------
 
 The user account details and settings.
 
 ```js
 apn.account.settings( console.log )
 ```
+
+#### Output
+
 ```js
 { fb_push_command: 0,
   facebook_paid: true,
@@ -97,8 +89,9 @@ apn.account.settings( console.log )
   facebook_sound: '' }
 ```
 
-## account.notify
-### ( vars, callback )
+
+account.notify ( vars, callback )
+--------------
 
 Send a notification to the user.
 
@@ -115,6 +108,9 @@ apn.account.notify(
   console.log
 )
 ```
+
+#### Output
+
 ```js
 { title: 'Subject line',
   message_level: 0,
@@ -129,30 +125,36 @@ apn.account.notify(
   display_ads: false }
 ```
 
-#### Fields
+### Fields
 
-  message                Alert message text
-  action_loc_key         Alert button text
-  title                  Subject line
-  subtitle               Below the subject
-  long_message           HTML message content
-                         (also in preview if long_message_preview is not set)
-  long_message_preview   Preview text
-  run_command            URL to open on 'action_loc_key' button
-  silent                 No alert window, just increase badge number
-  message_level          Importance, -2 to 2
-  sound                  Alert sound ID, see https://gist.github.com/penso/1217045
-  icon_url               Notification icon URL
+name                 | description
+-------------------- | ----------------------------------------------------
+message              | Alert message text
+action_loc_key       | Alert button text
+title                | Subject line
+subtitle             | Below the subject
+long_message         | HTML message content
+                     | (also in preview if long_message_preview is not set)
+long_message_preview | Preview text
+run_command          | URL to open on 'action_loc_key' button
+silent               | No alert window, just increase badge number
+message_level        | Importance, -2 to 2
+sound                | Alert sound ID,
+                     | see https://gist.github.com/penso/1217045
+icon_url             | Notification icon URL
 
 
-## account.notifications
-### ( callback )
+account.notifications ( callback )
+---------------------
 
 Get a list (array) of notifications from the server.
 
 ```js
 apn.account.notifications( console.log )
 ```
+
+#### Output
+
 ```js
 [ { thread_id: null,
     title: 'Subject line',
@@ -172,20 +174,26 @@ apn.account.notifications( console.log )
     id: 50103866 } ]
 ```
 
-## account.destroyall
-### ( callback )
 
-Delete all notifications from the server. This won't touch the device(s) as they use a local cache.
+account.destroyall ( callback )
+------------------
+
+Delete all notifications from the server.
+This won't touch the device(s) as they use a local cache.
 
 ```js
 apn.account.destroyall( console.log )
 ```
+
+#### Output
+
 ```js
 { Response: { OK: 'OK' } }
 ```
 
-## account.feeds
-### ( callback )
+
+account.feeds ( callback )
+-------------
 
 Get a list (array) of subscribed RSS feeds.
 
@@ -193,24 +201,9 @@ Get a list (array) of subscribed RSS feeds.
 apn.account.feeds( console.log )
 ```
 
-## Events
 
-The module emits some events to catch trouble away from the methods. Useful for debugging, logging, API outages, etc.
-
-## api-error
-### ( reasonObject )
-
-Every time an API call returns a HTTP status code >= 300 this event is triggered. The **reasonObject** contains details about the request and response.
-
-```js
-apn.on( 'api-error', function( reason ) {
-  console.log( 'API error:' )
-  console.log( reason )
-})
-```
-
-
-## Unlicense
+Unlicense
+---------
 
 This is free and unencumbered software released into the public domain.
 
