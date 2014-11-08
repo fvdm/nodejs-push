@@ -50,6 +50,35 @@ faast.account.notify(
 ```
 
 
+Methods
+-------
+
+The methods below take a callback _function_ as last parameter.
+The callback receives two parameters `err` in case of an error and `data`.
+
+```js
+function myCallback( err, data ) {
+  if( err ) {
+    console.log( err )
+    console.log( err.stack )
+  } else {
+    console.log( data.id )
+  }
+}
+
+faast.account.notify( props, myCallback )
+```
+
+### Errors
+
+message          | description
+---------------- | -------------------------------------------
+request failed   | The request cannot be made, see `err.error`
+request closed   | The connection was closed too early
+invalid response | The API returned unparsable data
+API error        | The API returned an error, see `err.code` and `err.body`
+
+
 account.settings ( callback )
 ----------------
 
