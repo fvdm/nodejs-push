@@ -1,32 +1,32 @@
 {
 	"author": {
-		"name": "Franklin van de Meent",
-		"email": "fr@nkl.in",
-		"url": "http://frankl.in"
+		"name":               "Franklin van de Meent",
+		"email":              "fr@nkl.in",
+		"url":                "https://frankl.in"
 	},
-	"name": "push-node",
-	"description": "Access the Push4 / App Notifications API (http://www.appnotifications.com/)",
-	"version": "0.1.1",
-	"homepage": "https://github.com/fvdm/nodejs-push",
+	"name":                 "push-node",
+	"description":          "Send push notifications with Faast (http://faast.io)",
+	"version":              "0.2.0",
 	"repository": {
-		"type": "git",
-		"url": "git://github.com/fvdm/nodejs-push.git"
+		"type":               "git",
+		"url":                "git://github.com/fvdm/nodejs-push.git"
 	},
 	"bugs": {
-		"url": "https://github.com/fvdm/nodejs-push/issues"
+		"url":                "https://github.com/fvdm/nodejs-push/issues"
 	},
-	"main": "push-node.js",
-	"dependencies": {},
-	"devDependencies": {},
+	"main":                 "push-node.js",
+	"dependencies":         {},
+	"devDependencies":      {},
 	"optionalDependencies": {},
 	"engines": {
-		"node": "*"
+		"node":               "*"
 	},
-	"tags": [
-		"4push",
-		"push4",
-		"middleware",
-		"api",
-		"appnotifications"
-	]
+	"tags":                 ["faast", "4push", "push4", "appnotifications"],
+	"license": {
+  	"type":               "Public Domain",
+  	"url":                "https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE"
+	},
+	"scripts": {
+  	"test":               "node test.js"
+	}
 }
