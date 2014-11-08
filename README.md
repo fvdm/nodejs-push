@@ -7,6 +7,9 @@ Faast push notification API module for [node.js](http://nodejs.org/).
 Installation
 ------------
 
+[![Build Status](https://travis-ci.org/fvdm/nodejs-push.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-push)
+
+
 Normal install:
 
 `npm install push-node`
