@@ -9,10 +9,9 @@ License:      Public Domain / Unlicense
 */
 
 var https = require('https'),
-  EventEmitter = require('events').EventEmitter,
   querystring = require('querystring')
 
-var app = new EventEmitter
+var app = {}
 
 
 // defaults
@@ -26,9 +25,7 @@ app.account = {
 
   // Subscribed feeds
   feeds: function( cb ) {
-    app.talk( 'GET', 'account/feeds', function( result ) {
-      cb( result )
-    })
+    app.talk( 'GET', 'account/feeds', cb )
   },
 
   // Send notification
@@ -37,29 +34,31 @@ app.account = {
     for( var key in vars ) {
       set[ 'notification['+ key +']' ] = vars[ key ]
     }
-    app.talk( 'POST', 'account/notifications', set, function( result ) {
-      cb( result )
-    })
+    app.talk( 'POST', 'account/notifications', set, cb )
   },
 
   // List notifications
   notifications: function( cb ) {
-    app.talk( 'GET', 'account/notifications', function( result ) {
-      cb( result.notifications )
+    app.talk( 'GET', 'account/notifications', function( err, result ) {
+      if( !err ) {
+        result = result.notifications || result
+      }
+      cb( err, result )
     })
   },
 
   // Delete all notifications from the server
   destroyall: function( cb ) {
-    app.talk( 'DELETE', 'account/notifications/destroy_all', function( result ) {
-      cb( result )
-    })
+    app.talk( 'DELETE', 'account/notifications/destroy_all', cb )
   },
 
   // Get account settings
   settings: function( cb ) {
-    app.talk( 'GET', 'account/notifications', function( result, head ) {
-      cb( result.user )
+    app.app.talk( 'GET', 'account/notifications', function( err, result ) {
+      if( !err ) {
+        result = result.user || result
+      }
+      cb( err, result.user )
     })
   }
 }
@@ -130,22 +129,15 @@ app.talk = function( type, path, fields, cb ) {
       // cleanup response
       data = data.replace( /(^[\r\n\s\t ]+|[\r\n\s\t ]+$)/g, '' )
       data = data.match( /^\{.*\}$/ ) ? JSON.parse( data ) : {}
-
-      // emit trouble
-      if( response.headers.status >= 300 ) {
-        app.emit( 'api-error', {
-          request:    options,
-          request_body: body,
-          response: {
-            headers:  response.headers,
-            body:   data
-          }
-        })
       }
 
-      // do callback
-      cb( data, response.headers )
+      if( response.statusCode >= 300 ) {
+        error = new Error('API error')
+        error.code = response.statusCode
+        error.body = data
+      }
 
+      cb( error, data )
     })
   })
 
