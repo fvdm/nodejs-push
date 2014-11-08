@@ -8,8 +8,8 @@ License:      Public Domain / Unlicense
               (https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE)
 */
 
-var https = require('https'),
-  querystring = require('querystring')
+var https = require('https')
+var querystring = require('querystring')
 
 var app = {}
 
@@ -23,12 +23,12 @@ app.api = {
 // Account
 app.account = {
 
-  // Subscribed feeds
+  // ! account.feeds
   feeds: function( cb ) {
     app.talk( 'GET', 'account/feeds', cb )
   },
 
-  // Send notification
+  // ! account.notify
   notify: function( vars, cb ) {
     var set = {}
     var keys = Object.keys(vars)
@@ -39,7 +39,7 @@ app.account = {
     app.talk( 'POST', 'account/notifications', set, cb )
   },
 
-  // List notifications
+  // ! account.notifications
   notifications: function( cb ) {
     app.talk( 'GET', 'account/notifications', function( err, result ) {
       if( !err ) {
@@ -49,12 +49,12 @@ app.account = {
     })
   },
 
-  // Delete all notifications from the server
+  // ! account.destroyall
   destroyall: function( cb ) {
     app.talk( 'DELETE', 'account/notifications/destroy_all', cb )
   },
 
-  // Get account settings
+  // ! account.settings
   settings: function( cb ) {
     app.app.talk( 'GET', 'account/notifications', function( err, result ) {
       if( !err ) {
@@ -66,14 +66,13 @@ app.account = {
 }
 
 
+// ! Communication
 app.talk = function( type, path, fields, cb ) {
-  if( !cb && typeof fields == 'function' ) {
+  if( !cb && typeof fields === 'function' ) {
     var cb = fields
     var fields = {}
   }
 
-  // build path
-  var path = '/'+ path +'.json'
   // prevent multiple callbacks
   var complete = false
   function doCallback( err, data ) {
@@ -83,50 +82,34 @@ app.talk = function( type, path, fields, cb ) {
     }
   }
 
-  // query string
-  var body = null
-  if( type == 'GET' ) {
-
-    // GET
-    if( app.api.credential ) {
-
-      // add api key to fields
-      fields.user_credentials = app.api.credential
-
-    }
-
-    // fields in path
-    path += '?'+ querystring.stringify( fields )
-
-  } else {
-
-    // POST
-    if( app.api.credential ) {
-
-      // add api key to path
-      path += '?user_credentials='+ app.api.credential
-
-    }
-
-    // fields in body
-    body = querystring.stringify( fields )
-
-  }
-
   // build request
-  var options = {
-    host:   'www.appnotifications.com',
-    port:   443,
-    path:   path,
-    method:   type,
-    headers: {
-      'Accept':   'application/json',
-      'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
-    },
-    agent:    false
+  var query = querystring.stringify( fields )
+  var path = '/'+ path +'.json'
+  var body = null
+
+  if( type == 'GET' ) {
+    if( app.api.credential ) {
+      fields.user_credentials = app.api.credential
+    }
+    path += '?'+ query
+  } else {
+    if( app.api.credential ) {
+      path += '?user_credentials='+ app.api.credential
+    }
+    body = query
   }
 
-  // do request
+  var options = {
+    host: 'www.appnotifications.com',
+    port: 443,
+    path: path,
+    method: type,
+    headers: {
+      'Accept': 'application/json',
+      'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
+    }
+  }
+
   var req = https.request( options )
 
   // response
@@ -151,13 +134,9 @@ app.talk = function( type, path, fields, cb ) {
     })
   })
 
-  // POST body
-  if( body ) {
-    req.write( body )
-  }
 
-  // close connection
-  req.end()
+  // done
+  req.end( body )
 }
 
 module.exports = app
