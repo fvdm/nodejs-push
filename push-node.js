@@ -57,7 +57,7 @@ app.settings = function( cb ) {
     if( !err ) {
       result = result.user || result
     }
-    cb( err, result.user )
+    cb( err, result )
   })
 }
 
