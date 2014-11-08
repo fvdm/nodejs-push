@@ -31,7 +31,9 @@ app.account = {
   // Send notification
   notify: function( vars, cb ) {
     var set = {}
-    for( var key in vars ) {
+    var keys = Object.keys(vars)
+    for( var i=0; i < keys.length; i++ ) {
+      var key = keys[i]
       set[ 'notification['+ key +']' ] = vars[ key ]
     }
     app.talk( 'POST', 'account/notifications', set, cb )
