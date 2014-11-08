@@ -119,10 +119,12 @@ app.talk = function( type, path, fields, cb ) {
 
     response.on( 'data', function( chunk ) { data += chunk })
     response.on( 'end', function() {
+      data = data.trim()
 
-      // cleanup response
-      data = data.replace( /(^[\r\n\s\t ]+|[\r\n\s\t ]+$)/g, '' )
-      data = data.match( /^\{.*\}$/ ) ? JSON.parse( data ) : {}
+      try {
+        data = JSON.parse( data )
+      } catch(e) {
+        error = new Error('invalid response')
       }
 
       if( response.statusCode >= 300 ) {
