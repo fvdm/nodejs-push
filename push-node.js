@@ -115,6 +115,7 @@ app.talk = function( type, path, fields, cb ) {
   // response
   req.on( 'response', function( response ) {
     var data = ''
+    var error = null
 
     response.on( 'data', function( chunk ) { data += chunk })
     response.on( 'end', function() {
