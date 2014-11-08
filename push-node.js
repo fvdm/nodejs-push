@@ -138,6 +138,12 @@ app.talk = function( type, path, fields, cb ) {
     })
   })
 
+  // error
+  req.on( 'error', function( err ) {
+    var error = new Error('request failed')
+    error.error = err
+    doCallback( err )
+  })
 
   // done
   req.end( body )
