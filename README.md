@@ -32,7 +32,7 @@ Send a notification to yourself.
 var faast = require('push-node')( 'API token' )
 
 // notify
-faast.account.notify(
+faast.notify(
   {
     message: 'Alert message',
     action_loc_key: 'Alert Button'
@@ -63,7 +63,7 @@ function myCallback( err, data ) {
   }
 }
 
-faast.account.notify( props, myCallback )
+faast.notify( props, myCallback )
 ```
 
 ### Errors
@@ -76,13 +76,13 @@ invalid response | The API returned unparsable data
 API error        | The API returned an error, see `err.code` and `err.body`
 
 
-account.settings ( callback )
-----------------
+settings ( callback )
+--------
 
 The user account details and settings.
 
 ```js
-faast.account.settings( console.log )
+faast.settings( console.log )
 ```
 
 #### Output
@@ -98,13 +98,13 @@ faast.account.settings( console.log )
 ```
 
 
-account.notify ( vars, callback )
---------------
+notify ( vars, callback )
+------
 
 Send a notification to the user.
 
 ```js
-faast.account.notify(
+faast.notify(
   {
     message: 'Alert message',
     long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
@@ -152,13 +152,13 @@ sound                | Alert sound ID,
 icon_url             | Notification icon URL
 
 
-account.notifications ( callback )
----------------------
+notifications ( callback )
+-------------
 
 Get a list (array) of notifications from the server.
 
 ```js
-faast.account.notifications( console.log )
+faast.notifications( console.log )
 ```
 
 #### Output
@@ -183,14 +183,14 @@ faast.account.notifications( console.log )
 ```
 
 
-account.destroyall ( callback )
-------------------
+destroyall ( callback )
+----------
 
 Delete all notifications from the server.
 This won't touch the device(s) as they use a local cache.
 
 ```js
-faast.account.destroyall( console.log )
+faast.destroyall( console.log )
 ```
 
 #### Output
@@ -200,13 +200,13 @@ faast.account.destroyall( console.log )
 ```
 
 
-account.feeds ( callback )
--------------
+feeds ( callback )
+-----
 
 Get a list (array) of subscribed RSS feeds.
 
 ```js
-faast.account.feeds( console.log )
+faast.feeds( console.log )
 ```
 
 
