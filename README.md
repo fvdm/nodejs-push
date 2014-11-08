@@ -26,7 +26,7 @@ To use this module you need an account at [Faast](http://faast.io/)
 and set the *API token* from your [account](http://api.faast.io/account/api_token).
 
 
-### Example
+#### Example
 
 Send a notification to yourself.
 
@@ -69,7 +69,7 @@ function myCallback( err, data ) {
 faast.notify( props, myCallback )
 ```
 
-### Errors
+#### Errors
 
 message          | description
 ---------------- | -------------------------------------------
@@ -136,7 +136,7 @@ faast.notify(
   display_ads: false }
 ```
 
-### Fields
+#### Fields
 
 name                 | description
 -------------------- | ----------------------------------------------------
