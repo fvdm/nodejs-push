@@ -53,7 +53,7 @@ app.destroyall = function( cb ) {
 
 // ! settings
 app.settings = function( cb ) {
-  app.talk( 'GET', 'account/notifications', function( err, result ) {
+  talk( 'GET', 'account/notifications', function( err, result ) {
     if( !err ) {
       result = result.user || result
     }
