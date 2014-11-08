@@ -117,6 +117,7 @@ app.talk = function( type, path, fields, cb ) {
     var data = ''
     var error = null
 
+    response.on( 'close', function() { error = new Error('request closed') })
     response.on( 'data', function( chunk ) { data += chunk })
     response.on( 'end', function() {
       data = data.trim()
