@@ -51,22 +51,6 @@ apn.account.notify(
 )
 ```
 
-#### Output
-
-```js
-{ title: 'Subject line',
-  message_level: 0,
-  long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
-  long_message_preview: 'Preview text',
-  subtitle: 'Below the subject',
-  send_at: '2012/07/11 19:07:32 +0000',
-  id: 12344,
-  favorite: false,
-  hasread: false,
-  message: 'Alert message',
-  display_ads: false }
-```
-
 
 account.settings ( callback )
 ----------------
