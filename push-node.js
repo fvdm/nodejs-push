@@ -20,49 +20,45 @@ app.api = {
 }
 
 
-// Account
-app.account = {
+// ! feeds
+app.feeds: function( cb ) {
+  talk( 'GET', 'account/feeds', cb )
+}
 
-  // ! account.feeds
-  feeds: function( cb ) {
-    talk( 'GET', 'account/feeds', cb )
-  },
-
-  // ! account.notify
-  notify: function( vars, cb ) {
-    var set = {}
-    var keys = Object.keys(vars)
-    for( var i=0; i < keys.length; i++ ) {
-      var key = keys[i]
-      set[ 'notification['+ key +']' ] = vars[ key ]
-    }
-    talk( 'POST', 'account/notifications', set, cb )
-  },
-
-  // ! account.notifications
-  notifications: function( cb ) {
-    talk( 'GET', 'account/notifications', function( err, result ) {
-      if( !err ) {
-        result = result.notifications || result
-      }
-      cb( err, result )
-    })
-  },
-
-  // ! account.destroyall
-  destroyall: function( cb ) {
-    talk( 'DELETE', 'account/notifications/destroy_all', cb )
-  },
-
-  // ! account.settings
-  settings: function( cb ) {
-    app.talk( 'GET', 'account/notifications', function( err, result ) {
-      if( !err ) {
-        result = result.user || result
-      }
-      cb( err, result.user )
-    })
+// ! notify
+app.notify = function( vars, cb ) {
+  var set = {}
+  var keys = Object.keys(vars)
+  for( var i=0; i < keys.length; i++ ) {
+    var key = keys[i]
+    set[ 'notification['+ key +']' ] = vars[ key ]
   }
+  talk( 'POST', 'account/notifications', set, cb )
+}
+
+// ! notifications
+app.notifications = function( cb ) {
+  talk( 'GET', 'account/notifications', function( err, result ) {
+    if( !err ) {
+      result = result.notifications || result
+    }
+    cb( err, result )
+  })
+}
+
+// ! destroyall
+app.destroyall = function( cb ) {
+  talk( 'DELETE', 'account/notifications/destroy_all', cb )
+}
+
+// ! settings
+app.settings = function( cb ) {
+  app.talk( 'GET', 'account/notifications', function( err, result ) {
+    if( !err ) {
+      result = result.user || result
+    }
+    cb( err, result.user )
+  })
 }
 
 
