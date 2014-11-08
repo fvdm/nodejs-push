@@ -46,16 +46,16 @@ apn.api.credential = 'my API secret'
 
 // notify
 apn.account.notify(
-	{
-		message: 'Alert message',
-		action_loc_key: 'Alert Button'
-		title: 'Subject line',
-		subtitle: 'Below the subject',
-		long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
-		long_message_preview: 'Preview text',
-		run_command: 'http://example.net/12345'
-	},
-	console.log
+  {
+    message: 'Alert message',
+    action_loc_key: 'Alert Button'
+    title: 'Subject line',
+    subtitle: 'Below the subject',
+    long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
+    long_message_preview: 'Preview text',
+    run_command: 'http://example.net/12345'
+  },
+  console.log
 )
 ```
 
@@ -104,15 +104,15 @@ Send a notification to the user.
 
 ```js
 apn.account.notify(
-	{
-		message: 'Alert message',
-		long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
-		title: 'Subject line',
-		subtitle: 'Below the subject',
-		long_message_preview: 'Preview text',
-		action_loc_key: 'Alert Button'
-	},
-	console.log
+  {
+    message: 'Alert message',
+    long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
+    title: 'Subject line',
+    subtitle: 'Below the subject',
+    long_message_preview: 'Preview text',
+    action_loc_key: 'Alert Button'
+  },
+  console.log
 )
 ```
 ```js
@@ -131,18 +131,18 @@ apn.account.notify(
 
 #### Fields
 
-	message                Alert message text
-	action_loc_key         Alert button text
-	title                  Subject line
-	subtitle               Below the subject
-	long_message           HTML message content
-	                       (also in preview if long_message_preview is not set)
-	long_message_preview   Preview text
-	run_command            URL to open on 'action_loc_key' button
-	silent                 No alert window, just increase badge number
-	message_level          Importance, -2 to 2
-	sound                  Alert sound ID, see https://gist.github.com/penso/1217045
-	icon_url               Notification icon URL
+  message                Alert message text
+  action_loc_key         Alert button text
+  title                  Subject line
+  subtitle               Below the subject
+  long_message           HTML message content
+                         (also in preview if long_message_preview is not set)
+  long_message_preview   Preview text
+  run_command            URL to open on 'action_loc_key' button
+  silent                 No alert window, just increase badge number
+  message_level          Importance, -2 to 2
+  sound                  Alert sound ID, see https://gist.github.com/penso/1217045
+  icon_url               Notification icon URL
 
 
 ## account.notifications
@@ -204,8 +204,8 @@ Every time an API call returns a HTTP status code >= 300 this event is triggered
 
 ```js
 apn.on( 'api-error', function( reason ) {
-	console.log( 'API error:' )
-	console.log( reason )
+  console.log( 'API error:' )
+  console.log( reason )
 })
 ```
 
