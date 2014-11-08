@@ -25,7 +25,7 @@ app.account = {
 
   // ! account.feeds
   feeds: function( cb ) {
-    app.talk( 'GET', 'account/feeds', cb )
+    talk( 'GET', 'account/feeds', cb )
   },
 
   // ! account.notify
@@ -36,12 +36,12 @@ app.account = {
       var key = keys[i]
       set[ 'notification['+ key +']' ] = vars[ key ]
     }
-    app.talk( 'POST', 'account/notifications', set, cb )
+    talk( 'POST', 'account/notifications', set, cb )
   },
 
   // ! account.notifications
   notifications: function( cb ) {
-    app.talk( 'GET', 'account/notifications', function( err, result ) {
+    talk( 'GET', 'account/notifications', function( err, result ) {
       if( !err ) {
         result = result.notifications || result
       }
@@ -51,12 +51,12 @@ app.account = {
 
   // ! account.destroyall
   destroyall: function( cb ) {
-    app.talk( 'DELETE', 'account/notifications/destroy_all', cb )
+    talk( 'DELETE', 'account/notifications/destroy_all', cb )
   },
 
   // ! account.settings
   settings: function( cb ) {
-    app.app.talk( 'GET', 'account/notifications', function( err, result ) {
+    app.talk( 'GET', 'account/notifications', function( err, result ) {
       if( !err ) {
         result = result.user || result
       }
@@ -67,7 +67,7 @@ app.account = {
 
 
 // ! Communication
-app.talk = function( type, path, fields, cb ) {
+function talk( type, path, fields, cb ) {
   if( !cb && typeof fields === 'function' ) {
     var cb = fields
     var fields = {}
