@@ -21,7 +21,7 @@ app.api = {
 
 
 // ! feeds
-app.feeds: function( cb ) {
+app.feeds = function( cb ) {
   talk( 'GET', 'account/feeds', cb )
 }
 
