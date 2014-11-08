@@ -1,10 +1,7 @@
-nodejs-push
-===========
+push-node
+=========
 
 Faast push notification API module for [node.js](http://nodejs.org/).
-
-To use this module you need an account at [Faast](http://faast.io/)
-and set the *API token* from your [account](http://api.faast.io/account/api_token).
 
 
 Installation
@@ -22,8 +19,8 @@ Or the latest version from Github, can be unstable:
 Usage
 -----
 
-For the methods below you need to set the **api.credential**,
-which can be found in your [account](http://api.faast.io/account/api_token).
+To use this module you need an account at [Faast](http://faast.io/)
+and set the *API token* from your [account](http://api.faast.io/account/api_token).
 
 
 ### Example
