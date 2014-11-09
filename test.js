@@ -82,6 +82,13 @@ queue.push( function() {
       process.exit(1)
     } else {
       console.log('API access: \033[1m\033[32mok\033[0m')
+      
+      // ! settings
+      doTest( err, 'settings', [
+        ['type', data instanceof Object],
+        ['propert', typeof data.email === 'string']
+      ])
+      
       doNext()
     }
   })
@@ -105,16 +112,6 @@ queue.push( function() {
       ['property', typeof data.long_message === 'string'],
       ['value', data.long_message === note.long_message],
       ['id', typeof data.id === 'number']
-    ])
-  })
-})
-
-// ! settings
-queue.push( function() {
-  faast.settings( function( err, data ) {
-    doTest( err, 'settings', [
-      ['type', data instanceof Object],
-      ['propert', typeof data.email === 'string']
     ])
   })
 })
