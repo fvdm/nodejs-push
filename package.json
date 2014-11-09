@@ -1,32 +1,32 @@
 {
-	"author": {
-		"name":               "Franklin van de Meent",
-		"email":              "fr@nkl.in",
-		"url":                "https://frankl.in"
-	},
-	"name":                 "push-node",
-	"description":          "Send push notifications with Faast (http://faast.io)",
-	"version":              "1.0.0",
-	"repository": {
-		"type":               "git",
-		"url":                "git://github.com/fvdm/nodejs-push.git"
-	},
-	"bugs": {
-		"url":                "https://github.com/fvdm/nodejs-push/issues"
-	},
-	"main":                 "push-node.js",
-	"dependencies":         {},
-	"devDependencies":      {},
-	"optionalDependencies": {},
-	"engines": {
-		"node":               "*"
-	},
-	"tags":                 ["faast", "4push", "push4", "appnotifications"],
-	"license": {
-  	"type":               "Public Domain",
-  	"url":                "https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE"
-	},
-	"scripts": {
-  	"test":               "node test.js"
-	}
+  "author": {
+    "name":               "Franklin van de Meent",
+    "email":              "fr@nkl.in",
+    "url":                "https://frankl.in"
+  },
+  "name":                 "push-node",
+  "description":          "Send push notifications with Faast (http://faast.io)",
+  "version":              "1.0.0",
+  "repository": {
+    "type":               "git",
+    "url":                "git://github.com/fvdm/nodejs-push.git"
+  },
+  "bugs": {
+    "url":                "https://github.com/fvdm/nodejs-push/issues"
+  },
+  "main":                 "push-node.js",
+  "dependencies":         {},
+  "devDependencies":      {},
+  "optionalDependencies": {},
+  "engines": {
+    "node":               "*"
+  },
+  "tags":                 ["faast", "4push", "push4", "appnotifications"],
+  "license": {
+    "type":               "Public Domain",
+    "url":                "https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE"
+  },
+  "scripts": {
+    "test":               "node test.js"
+  }
 }
