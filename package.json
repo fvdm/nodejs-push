@@ -6,7 +6,7 @@
   },
   "name":                 "push-node",
   "description":          "Send push notifications with Faast (http://faast.io)",
-  "version":              "1.0.0",
+  "version":              "1.0.1",
   "repository": {
     "type":               "git",
     "url":                "git://github.com/fvdm/nodejs-push.git"
