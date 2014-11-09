@@ -21,7 +21,7 @@
   "engines": {
     "node":               "*"
   },
-  "keywords":             ["faast", "4push", "push4", "appnotifications"],
+  "keywords":             ["faast", "apns", "push", "notification", "ios"],
   "license": {
     "type":               "Public Domain",
     "url":                "https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE"
