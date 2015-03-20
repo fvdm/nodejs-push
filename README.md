@@ -3,30 +3,12 @@ push-node
 
 Faast push notification API module for [node.js](http://nodejs.org/).
 
-
-Installation
-------------
-
-[![Build Status](https://travis-ci.org/fvdm/nodejs-push.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-push)
-
-
-Normal install:
-
-`npm install push-node`
-
-Or the latest version from Github, can be unstable:
-
-`npm install git+https://github.com/fvdm/nodejs-push`
-
-
-Usage
------
-
 To use this module you need an account at [Faast](http://faast.io/)
 and set the *API token* from your [account](http://api.faast.io/account/api_token).
 
 
-#### Example
+Example
+-------
 
 Send a notification to yourself.
 
@@ -48,6 +30,17 @@ faast.notify(
   console.log
 )
 ```
+
+
+Installation
+------------
+
+[![Build Status](https://travis-ci.org/fvdm/nodejs-push.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-push)
+
+
+Stable: `npm install push-node`
+
+Develop: `npm install fvdm/nodejs-push#develop`
 
 
 Methods
