@@ -93,7 +93,7 @@ function talk( type, path, fields, cb ) {
   }
 
   var options = {
-    host: 'www.appnotifications.com',
+    host: 'api.faast.io',
     port: 443,
     path: path,
     method: type,
