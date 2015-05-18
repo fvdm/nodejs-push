@@ -33,7 +33,7 @@ app.notify = function( vars, cb ) {
     var key = keys[i]
     set[ 'notification['+ key +']' ] = vars[ key ]
   }
-  talk( 'POST', 'account/notifications', set, cb )
+  talk( 'POST', 'notifications', set, cb )
 }
 
 // ! notifications
