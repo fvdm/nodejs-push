@@ -122,6 +122,9 @@ function talk( type, path, fields, cb ) {
         error = new Error('API error')
         error.code = response.statusCode
         error.body = data
+        error.request = options
+        error.request.path.replace( app.api.credential, 'secret' )
+        error.requestBody = body ? body.replace( app.api.credential, 'secret' ) : body
       }
 
       doCallback( error, data )
