@@ -46,11 +46,6 @@ app.notifications = function( cb ) {
   })
 }
 
-// ! destroyall
-app.destroyall = function( cb ) {
-  talk( 'DELETE', 'account/notifications/destroy_all', cb )
-}
-
 // ! settings
 app.settings = function( cb ) {
   talk( 'GET', 'account', function( err, result ) {
