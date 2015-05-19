@@ -119,8 +119,8 @@ function talk( type, path, fields, cb ) {
         error.code = response.statusCode
         error.body = data
         error.request = options
-        error.request.path.replace( app.api.credential, 'secret' )
-        error.requestBody = body ? body.replace( app.api.credential, 'secret' ) : body
+        error.request.path = error.request.path.replace( app.api.credential, '[secure]' )
+        error.requestBody = body ? body.replace( app.api.credential, '[secure]' ) : body
       }
 
       doCallback( error, data )
