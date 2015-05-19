@@ -83,7 +83,7 @@ function talk (type, path, fields, cb) {
   fields.user_credentials = app.api.credential;
   path = '/'+ path +'.json';
 
-  if (type == 'GET') {
+  if (type === 'GET') {
     path += '?'+ querystring.stringify (fields);
   } else {
     body = querystring.stringify (fields);
