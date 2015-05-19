@@ -21,7 +21,14 @@ app.api = {
 
 // ! feeds
 app.feeds = function (cb) {
-  talk ('GET', 'account/feeds', cb);
+  talk ('GET', 'account/feeds', function (err, result) {
+    if (err) { return cb (err); }
+    if (result && typeof result.rss_feeds === 'object') {
+      cb (null, result.rss_feeds);
+    } else {
+      cb (null, []);
+    }
+  });
 };
 
 // ! notify

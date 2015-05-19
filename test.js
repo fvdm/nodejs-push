@@ -129,9 +129,7 @@ queue.push (function () {
 queue.push (function () {
   faast.feeds (function (err, data) {
     doTest (err, 'feeds', [
-      ['type', data instanceof Object],
-      ['count', typeof data.count === 'number'],
-      ['rss_feeds', data.rss_feeds instanceof Array]
+      ['type', data instanceof Array]
     ]);
   });
 });
