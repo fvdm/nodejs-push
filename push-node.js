@@ -95,11 +95,14 @@ function talk (type, path, fields, cb) {
     path: path,
     method: type,
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json',
       'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
     }
   };
+
+  if (type === 'POST') {
+    options.headers ['Content-Type'] = 'application/x-www-form-urlencoded';
+  }
 
   var req = https.request (options);
 
