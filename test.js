@@ -94,6 +94,17 @@ queue.push( function() {
   })
 })
 
+// ! error
+queue.push( function () {
+  faast.notify( {}, function( err, data ) {
+    console.log (err)
+    doTest( null, 'Error', [
+      ['type', err instanceof Error],
+      ['message', err.message === 'API error']
+    ])
+  })
+})
+
 // ! notify
 queue.push( function() {
   var note = {
