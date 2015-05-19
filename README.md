@@ -197,8 +197,28 @@ Get a list (array) of subscribed RSS feeds.
 faast.feeds (console.log);
 ```
 
+Output:
 
 ```js
+[
+  {
+    website: 'https://frankl.in',
+    title: 'Franklin',
+    feed: 'http://frankl.in/feed/',
+    id: 685969,
+    sound: 'R',
+    updated_at: '2015/05/19 20:11:58 +0000',
+    message_level: 0,
+    paid: true,
+    next_fetch: '2015-05-20 01:41:46 +0200',
+    previous_fetch: '2015-05-20 01:23:53 +0200',
+    previous_item_at: '2014/05/30 21:02:32 +0000',
+    snippet: 'Interactive command for Mac Homebrew updates. Source: Franklin',
+    rss_status: 'active',
+    rss_feedr_id: 12345,
+    last_push_received_at: null
+  }
+]
 ```
 
 
