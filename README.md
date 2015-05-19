@@ -14,10 +14,10 @@ Send a notification to yourself.
 
 ```js
 // setup
-var faast = require('push-node')( 'API token' )
+var faast = require ('push-node') ('API token');
 
 // notify
-faast.notify(
+faast.notify (
   {
     message: 'Alert message',
     action_loc_key: 'Alert Button'
@@ -28,7 +28,7 @@ faast.notify(
     run_command: 'http://example.net/12345'
   },
   console.log
-)
+);
 ```
 
 
@@ -50,26 +50,26 @@ The methods below take a callback _function_ as last parameter.
 The callback receives two parameters `err` in case of an error and `data`.
 
 ```js
-function myCallback( err, data ) {
-  if( err ) {
-    console.log( err )
-    console.log( err.stack )
+function myCallback (err, data) {
+  if (err) {
+    console.log (err);
+    console.log (err.stack);
   } else {
-    console.log( data.id )
+    console.log (data.id);
   }
 }
 
-faast.notify( props, myCallback )
+faast.notify (props, myCallback);
 ```
 
 #### Errors
 
-message          | description
----------------- | -------------------------------------------
-request failed   | The request cannot be made, see `err.error`
-request closed   | The connection was closed too early
-invalid response | The API returned unparsable data
-API error        | The API returned an error, see `err.code` and `err.body`
+message          | description                         | additional
+-----------------|--------------------------------------------------
+request failed   | The request cannot be made          | `err.error`
+request closed   | The connection was closed too early |
+invalid response | The API returned unparsable data    |
+API error        | The API returned an error           | `err.code`, `err.body`, `err.request`, `err.requestBody`
 
 
 settings ( callback )
@@ -78,19 +78,21 @@ settings ( callback )
 The user account details and settings.
 
 ```js
-faast.settings( console.log )
+faast.settings (console.log);
 ```
 
 #### Output
 
 ```js
-{ fb_push_command: 0,
+{
+  fb_push_command: 0,
   facebook_paid: true,
   force_twitter_client: true,
   twitter_sound: 'S',
   unlocked: true,
   weekend_silent_mode_at: '2000/01/02 23:00:00 +0000',
-  facebook_sound: '' }
+  facebook_sound: ''
+}
 ```
 
 
@@ -100,7 +102,7 @@ notify ( vars, callback )
 Send a notification to the user.
 
 ```js
-faast.notify(
+faast.notify (
   {
     message: 'Alert message',
     long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
@@ -110,13 +112,14 @@ faast.notify(
     action_loc_key: 'Alert Button'
   },
   console.log
-)
+);
 ```
 
 #### Output
 
 ```js
-{ title: 'Subject line',
+{
+  title: 'Subject line',
   message_level: 0,
   long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
   long_message_preview: 'Preview text',
@@ -126,23 +129,24 @@ faast.notify(
   favorite: false,
   hasread: false,
   message: 'Alert message',
-  display_ads: false }
+  display_ads: false
+}
 ```
 
 #### Fields
 
 name                 | description
--------------------- | ----------------------------------------------------
+---------------------|-----------------------------------------------------
 message              | Alert message text
 action_loc_key       | Alert button text
 title                | Subject line
 subtitle             | Below the subject
 long_message         | HTML message content
-                     | (also in preview if long_message_preview is not set)
+                     | (also in preview if `long_message_preview` is not set)
 long_message_preview | Preview text
-run_command          | URL to open on 'action_loc_key' button
+run_command          | URL to open on `action_loc_key` button
 silent               | No alert window, just increase badge number
-message_level        | Importance, -2 to 2
+message_level        | Importance, `-2` to `2`
 sound                | Alert sound ID,
                      | see https://gist.github.com/penso/1217045
 icon_url             | Notification icon URL
@@ -154,20 +158,23 @@ notifications ( callback )
 Get a list (array) of notifications from the server.
 
 ```js
-faast.notifications( console.log )
+faast.notifications (console.log);
 ```
 
 #### Output
 
 ```js
-[ { thread_id: null,
+[
+  {
+    thread_id: null,
     title: 'Subject line',
     send_at: '2012/07/11 19:34:15 +0000',
     app_id: null,
     long_message_preview: 'Preview text',
     subtitle: 'Below the subject',
     icon_url: null,
-    id: 50103867 },
+    id: 50103867
+  },
   { thread_id: null,
     title: 'Subject line',
     send_at: '2012/07/11 19:34:12 +0000',
@@ -175,24 +182,9 @@ faast.notifications( console.log )
     long_message_preview: 'Preview text',
     subtitle: 'Below the subject',
     icon_url: null,
-    id: 50103866 } ]
-```
-
-
-destroyall ( callback )
-----------
-
-Delete all notifications from the server.
-This won't touch the device(s) as they use a local cache.
-
-```js
-faast.destroyall( console.log )
-```
-
-#### Output
-
-```js
-{ Response: { OK: 'OK' } }
+    id: 50103866
+  }
+]
 ```
 
 
@@ -202,7 +194,11 @@ feeds ( callback )
 Get a list (array) of subscribed RSS feeds.
 
 ```js
-faast.feeds( console.log )
+faast.feeds (console.log);
+```
+
+
+```js
 ```
 
 
