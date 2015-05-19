@@ -38,7 +38,7 @@ app.notify = function( vars, cb ) {
 
 // ! notifications
 app.notifications = function( cb ) {
-  talk( 'GET', 'account/notifications', function( err, result ) {
+  talk( 'GET', 'notifications', function( err, result ) {
     if( !err ) {
       result = result.notifications || result
     }
@@ -53,7 +53,7 @@ app.destroyall = function( cb ) {
 
 // ! settings
 app.settings = function( cb ) {
-  talk( 'GET', 'account/notifications', function( err, result ) {
+  talk( 'GET', 'account', function( err, result ) {
     if( !err ) {
       result = result.user || result
     }
@@ -79,9 +79,9 @@ function talk( type, path, fields, cb ) {
   }
 
   // build request
-  var path = '/'+ path +'.json'
   var body = null
   fields.user_credentials = app.api.credential
+  path = '/'+ path +'.json';
 
   if( type == 'GET' ) {
     path += '?'+ querystring.stringify( fields )
