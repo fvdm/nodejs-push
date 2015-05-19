@@ -101,7 +101,7 @@ queue.push( function() {
     long_message: 'Looks alright so far',
     title: 'npm test',
     subtitle: 'Looking good',
-    long_message_preview: 'Preview text',
+    long_message_preview: new Date().toJSON(),
     action_loc_key: 'Code',
     run_command: 'https://github.com/fvdm/nodejs-push'
   }
