@@ -109,8 +109,6 @@ queue.push( function() {
   faast.notify( note, function( err, data ) {
     doTest( err, 'notify', [
       ['type', data instanceof Object],
-      ['property', typeof data.long_message === 'string'],
-      ['value', data.long_message === note.long_message],
       ['id', typeof data.id === 'number']
     ])
   })
