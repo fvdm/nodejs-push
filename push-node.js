@@ -90,6 +90,7 @@ function talk( type, path, fields, cb ) {
     path: path,
     method: type,
     headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json',
       'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
     }
