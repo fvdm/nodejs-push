@@ -86,7 +86,7 @@ queue.push( function() {
       // ! settings
       doTest( err, 'settings', [
         ['type', data instanceof Object],
-        ['propert', typeof data.email === 'string']
+        ['property', typeof data.email === 'string']
       ])
       
       doNext()
