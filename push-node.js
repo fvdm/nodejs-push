@@ -90,16 +90,10 @@ function talk (type, path, fields, cb) {
   fields.user_credentials = app.api.credential;
   path = '/'+ path +'.json';
 
-  if (type === 'GET') {
-    path += '?'+ querystring.stringify (fields);
-  } else {
-    body = querystring.stringify (fields);
-  }
-
   var options = {
     host: 'api.faast.io',
     port: 443,
-    path: path,
+    path: path + (type === 'GET' ? '?'+ querystring.stringify (fields)),
     method: type,
     headers: {
       'Accept': 'application/json',
@@ -108,6 +102,7 @@ function talk (type, path, fields, cb) {
   };
 
   if (type === 'POST') {
+    body = querystring.stringify (fields);
     options.headers ['Content-Type'] = 'application/x-www-form-urlencoded';
   }
 
