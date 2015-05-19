@@ -73,6 +73,11 @@ function talk( type, path, fields, cb ) {
     }
   }
 
+  // check credentials
+  if( !app.api.credential ) {
+    return doCallback( new Error('api.credential missing') );
+  }
+
   // build request
   var body = null
   fields.user_credentials = app.api.credential
