@@ -93,7 +93,7 @@ function talk (type, path, fields, cb) {
   var options = {
     host: 'api.faast.io',
     port: 443,
-    path: path + (type === 'GET' ? '?'+ querystring.stringify (fields)),
+    path: path + (type === 'GET' ? '?'+ querystring.stringify (fields) : ''),
     method: type,
     headers: {
       'Accept': 'application/json',
