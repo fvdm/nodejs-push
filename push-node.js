@@ -104,6 +104,7 @@ function talk (type, path, fields, cb) {
   if (type === 'POST') {
     body = querystring.stringify (fields);
     options.headers ['Content-Type'] = 'application/x-www-form-urlencoded';
+    options.headers ['Content-Length'] = body.length;
   }
 
   var req = https.request (options);
