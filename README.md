@@ -37,11 +37,9 @@ faast.notify (
 Installation
 ------------
 
+`npm install push-node`
 
-
-Stable: `npm install push-node`
-
-Develop: `npm install fvdm/nodejs-push#develop`
+For the most recent code see the [Development](#development) section below.
 
 
 Methods
@@ -221,6 +219,35 @@ Output:
   }
 ]
 ```
+
+
+Development
+-----------
+
+[![Circle CI](https://circleci.com/gh/fvdm/nodejs-push/tree/develop.svg?style=svg)](https://circleci.com/gh/fvdm/nodejs-push/tree/develop)
+
+
+You can install the latest development version with npm:
+
+`npm install fvdm/nodejs-push#develop`
+
+* When submitting a Pull Request please make sure to not use the master branch,
+the `develop` branch is where everything happens.
+* Also please use the same code style as the rest of this module.
+* Always test your changes, see [Testing](#testing) below.
+* Thank you.
+
+
+#### Testing:
+
+```sh
+nvm install stable
+cd node_modules/push-node
+export FAAST_TOKEN=Your_Token npm test
+```
+
+* [nvm](https://github.com/creationix/nvm)
+* [Faast token](https://api.faast.io/account/api_token)
 
 
 Unlicense
