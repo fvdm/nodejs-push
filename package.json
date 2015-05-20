@@ -21,7 +21,7 @@
   "engines": {
     "node":               "*"
   },
-  "keywords":             ["faast", "apns", "push", "notification", "ios"],
+  "keywords":             ["faast", "apns", "push", "notification", "ios", "unlicense"],
   "license": {
     "type":               "Unlicense",
     "url":                "https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE"
