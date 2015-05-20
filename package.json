@@ -23,7 +23,7 @@
   },
   "keywords":             ["faast", "apns", "push", "notification", "ios"],
   "license": {
-    "type":               "Public Domain",
+    "type":               "Unlicense",
     "url":                "https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE"
   },
   "scripts": {
