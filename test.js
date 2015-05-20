@@ -1,3 +1,13 @@
+/*
+Name:         push-node - test script
+Description:  Send push notifications with Faast (http://faast.io)
+Author:       Franklin van de Meent (https://frankl.in)
+Source:       https://github.com/fvdm/nodejs-push
+Feedback:     https://github.com/fvdm/nodejs-push/issues
+License:      Public Domain / Unlicense
+              (https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE)
+*/
+
 var util = require ('util');
 
 // Setup
