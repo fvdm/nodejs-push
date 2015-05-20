@@ -66,7 +66,7 @@ faast.notify (props, myCallback);
 #### Errors
 
 message          | description                         | additional
------------------|--------------------------------------------------
+-----------------|-------------------------------------|------------
 request failed   | The request cannot be made          | `err.error`
 request closed   | The connection was closed too early |
 invalid response | The API returned unparsable data    |
