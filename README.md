@@ -71,30 +71,6 @@ invalid response | The API returned unparsable data    |
 API error        | The API returned an error           | `err.code`, `err.body`, `err.request`, `err.requestBody`
 
 
-settings ( callback )
---------
-
-The user account details and settings.
-
-```js
-faast.settings (console.log);
-```
-
-#### Output
-
-```js
-{
-  fb_push_command: 0,
-  facebook_paid: true,
-  force_twitter_client: true,
-  twitter_sound: 'S',
-  unlocked: true,
-  weekend_silent_mode_at: '2000/01/02 23:00:00 +0000',
-  facebook_sound: ''
-}
-```
-
-
 notify ( vars, callback )
 ------
 
@@ -218,6 +194,30 @@ Output:
     last_push_received_at: null
   }
 ]
+```
+
+
+settings ( callback )
+--------
+
+The user account details and settings.
+
+```js
+faast.settings (console.log);
+```
+
+#### Output
+
+```js
+{
+  fb_push_command: 0,
+  facebook_paid: true,
+  force_twitter_client: true,
+  twitter_sound: 'S',
+  unlocked: true,
+  weekend_silent_mode_at: '2000/01/02 23:00:00 +0000',
+  facebook_sound: ''
+}
 ```
 
 
