@@ -76,7 +76,7 @@ function talk (type, path, fields, cb) {
   function doCallback (err, data) {
     if (!complete) {
       complete = true;
-      cb (err, data || null);
+      cb && cb (err, data || null);
     }
   }
 
