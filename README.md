@@ -226,23 +226,27 @@ Development
 
 [![Circle CI](https://circleci.com/gh/fvdm/nodejs-push/tree/develop.svg?style=svg)](https://circleci.com/gh/fvdm/nodejs-push/tree/develop)
 
+There are two main branches in the repository.
+`master` is equal to the stable release on [npm](https://www.npmjs.com/package/push-node),
+while `develop` is the active development branch.
 
-You can install the latest development version with npm:
+You can install and use the latest development version with npm:
 
 `npm install fvdm/nodejs-push#develop`
 
-* When submitting a Pull Request please make sure to not use the master branch,
-the `develop` branch is where everything happens.
+* When submitting a Pull Request please make sure to not use the master branch.
 * Also please use the same code style as the rest of this module.
-* Always test your changes, see [Testing](#testing) below.
-* Thank you.
+* Test your changes, see [Testing](#testing) below.
+
+[Github repository](https://github.com/fvdm/nodejs-push) | [Issues](https://github.com/fvdm/nodejs-push/issues)
 
 
 #### Testing:
 
 ```sh
 nvm install stable
-cd node_modules/push-node
+git clone https://github.com/fvdm/nodejs-push -b develop
+cd nodejs-push
 export FAAST_TOKEN=Your_Token npm test
 ```
 
