@@ -193,8 +193,9 @@ function methodSettings (callback) {
 /**
  * Configure module
  *
- * @param token {string} - Your API access token / credential
- * @param [timeout] {numbers=5000} - Request time out in ms
+ * @param config.token {string} - Your API access token / credential
+ * @param [config.timeout] {numbers=5000} - Request time out in ms
+ * @param [config.tlsVerify] {boolean=true} - Validate remote TLS certificate
  * @returns {object} - Methods
  */
 
