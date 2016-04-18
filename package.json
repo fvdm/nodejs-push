@@ -1,29 +1,35 @@
 {
   "author": {
-    "name":               "Franklin van de Meent",
-    "email":              "fr@nkl.in",
-    "url":                "https://frankl.in"
+    "name": "Franklin van de Meent",
+    "email": "fr@nkl.in",
+    "url": "https://frankl.in"
   },
-  "name":                 "push-node",
-  "description":          "Send push notifications with Faast (http://faast.io)",
-  "version":              "2.1.0",
+  "name": "push-node",
+  "description": "Send push notifications with Faast (http://faast.io)",
+  "version": "2.1.0",
   "repository": {
-    "type":               "git",
-    "url":                "git://github.com/fvdm/nodejs-push.git"
+    "type": "git",
+    "url": "git://github.com/fvdm/nodejs-push.git"
   },
   "bugs": {
-    "url":                "https://github.com/fvdm/nodejs-push/issues"
+    "url": "https://github.com/fvdm/nodejs-push/issues"
   },
-  "main":                 "push-node.js",
-  "dependencies":         {},
-  "devDependencies":      {},
-  "optionalDependencies": {},
+  "main": "push-node.js",
+  "dependencies": {},
+  "devDependencies": {},
   "engines": {
-    "node":               "*"
+    "node": "*"
   },
-  "keywords":             ["faast", "apns", "push", "notification", "ios", "unlicense"],
-  "license":              "Unlicense",
+  "keywords": [
+    "faast",
+    "apns",
+    "push",
+    "notification",
+    "ios",
+    "unlicense"
+  ],
+  "license": "Unlicense",
   "scripts": {
-    "test":               "node test.js"
+    "test": "node test.js"
   }
 }
