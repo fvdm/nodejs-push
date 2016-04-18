@@ -3,7 +3,7 @@ push-node
 
 Faast push notification API module for [node.js](http://nodejs.org/).
 
-[![Circle CI](https://circleci.com/gh/fvdm/nodejs-push/tree/master.svg?style=svg)](https://circleci.com/gh/fvdm/nodejs-push/tree/master)
+[![Build Status](https://travis-ci.org/fvdm/nodejs-push.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-push)
 
 To use this module you need an account at [Faast](http://faast.io/)
 and set the _API token_ from your [account](https://api.faast.io/account/api_token).
