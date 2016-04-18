@@ -12,7 +12,8 @@ var httpreq = require ('httpreq');
 
 var config = {
   token: null,
-  timeout: 5000
+  timeout: 5000,
+  tlsVerify: true,
 };
 
 
@@ -73,6 +74,7 @@ function sendRequest (method, path, fields, callback) {
     url: 'https://api.faast.io' + path + '.json',
     method: method,
     timeout: config.timeout,
+    rejectUnauthorized: config.tlsVerify,
     headers: {
       'Accept': 'application/json',
       'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
@@ -197,8 +199,14 @@ function methodSettings (callback) {
  */
 
 module.exports = function (token, timeout) {
-  config.token = token;
-  config.timeout = timeout || 5000;
+  if (token instanceof Object) {
+    config.token = token.token;
+    config.timeout = token.timeout || 5000;
+    config.tlsVerify = token.tlsVerify || true;
+  } else {
+    config.token = token;
+    config.timeout = timeout || 5000;
+  }
 
   return {
     settings: methodSettings,
