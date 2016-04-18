@@ -15,7 +15,9 @@
     "url": "https://github.com/fvdm/nodejs-push/issues"
   },
   "main": "push-node.js",
-  "dependencies": {},
+  "dependencies": {
+    "httpreq": "^0.4.16"
+  },
   "devDependencies": {
     "dotest": "^1.8.0",
     "eslint": "^2.8.0"
