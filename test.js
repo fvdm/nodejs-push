@@ -17,7 +17,7 @@ var app = require ('./');
 var config = {
   token: process.env.FAAST_TOKEN || null,
   timeout: process.env.FAAST_TIMEOUT || 5000,
-  tlsVerify: process.env.FAAST_TLSVERIFY === 'false' ? false : true
+  tlsVerify: process.env.FAAST_TLSVERIFY !== 'false'
 };
 
 var faast = app (config);

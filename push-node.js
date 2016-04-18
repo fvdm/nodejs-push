@@ -203,7 +203,7 @@ module.exports = function (token, timeout) {
   if (token instanceof Object) {
     config.token = token.token;
     config.timeout = token.timeout || 5000;
-    config.tlsVerify = token.tlsVerify || true;
+    config.tlsVerify = token.tlsVerify;
   } else {
     config.token = token;
     config.timeout = timeout || 5000;
