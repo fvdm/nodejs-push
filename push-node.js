@@ -69,6 +69,16 @@ function processResponse (err, res, callback) {
  */
 
 function sendRequest (method, path, fields, callback) {
+  var options = {
+    url: 'https://api.faast.io' + path + '.json',
+    method: method,
+    timeout: config.timeout,
+    headers: {
+      'Accept': 'application/json',
+      'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
+    }
+  };
+
   if (typeof fields === 'function') {
     callback = fields;
     fields = {};
@@ -76,23 +86,13 @@ function sendRequest (method, path, fields, callback) {
 
   // check credentials
   if (!config.token) {
-    callback (new Error ('api.credential missing'));
+    callback (new Error ('config.token not set'));
     return;
   }
 
   // build request
   fields.user_credentials = config.token;
-
-  var options = {
-    url: 'https://api.faast.io' + path + '.json',
-    method: method,
-    parameters: fields,
-    timeout: config.timeout,
-    headers: {
-      'Accept': 'application/json',
-      'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
-    }
-  };
+  options.parameters = fields;
 
   httpreq.doRequest (options, function (err, res) {
     processResponse (err, res, callback);
@@ -139,7 +139,7 @@ function methodNotify (params, callback) {
   var key;
 
   for (key in params) {
-    set ['notification['+ key +']'] = params [key];
+    set ['notification[' + key + ']'] = params [key];
   }
 
   sendRequest ('POST', '/notifications', set, callback);
