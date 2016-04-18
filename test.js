@@ -15,6 +15,8 @@ var app = require ('./');
 // Setup
 // set env FAAST_TOKEN (Travis CI)
 var token = process.env.FAAST_TOKEN || null;
+var timeout = process.env.FAAST_TIMEOUT || 5000;
+
 var faast = app (token);
 
 
