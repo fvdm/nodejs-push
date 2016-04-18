@@ -6,7 +6,7 @@ Faast push notification API module for [node.js](http://nodejs.org/).
 [![Circle CI](https://circleci.com/gh/fvdm/nodejs-push/tree/master.svg?style=svg)](https://circleci.com/gh/fvdm/nodejs-push/tree/master)
 
 To use this module you need an account at [Faast](http://faast.io/)
-and set the *API token* from your [account](https://api.faast.io/account/api_token).
+and set the _API token_ from your [account](https://api.faast.io/account/api_token).
 
 
 Example
@@ -39,8 +39,6 @@ Installation
 
 `npm install push-node`
 
-For the most recent code see the [Development](#development) section below.
-
 
 Methods
 -------
@@ -52,10 +50,10 @@ The callback receives two parameters `err` in case of an error and `data`.
 function myCallback (err, data) {
   if (err) {
     console.log (err);
-    console.log (err.stack);
-  } else {
-    console.log (data.id);
+    return;
   }
+
+  console.log (data.id);
 }
 
 faast.notify (props, myCallback);
@@ -66,28 +64,26 @@ faast.notify (props, myCallback);
 message          | description                         | additional
 :----------------|:------------------------------------|:-----------
 request failed   | The request cannot be made          | `err.error`
-request closed   | The connection was closed too early |
 invalid response | The API returned unparsable data    |
-API error        | The API returned an error           | `err.code`, `err.body`, `err.request`, `err.requestBody`
+API error        | The API returned an error           | `err.code`, `err.body`
 
 
-notify ( vars, callback )
-------
+### notify
+**( vars, callback )**
 
 Send a notification to the user.
 
 ```js
-faast.notify (
-  {
-    message: 'Alert message',
-    long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
-    title: 'Subject line',
-    subtitle: 'Below the subject',
-    long_message_preview: 'Preview text',
-    action_loc_key: 'Alert Button'
-  },
-  console.log
-);
+var params = {
+  message: 'Alert message',
+  long_message: 'The message (also in preview if <b>long_message_preview</b> is not set)',
+  title: 'Subject line',
+  subtitle: 'Below the subject',
+  long_message_preview: 'Preview text',
+  action_loc_key: 'Alert Button'
+};
+
+faast.notify (params, console.log);
 ```
 
 #### Output
@@ -116,19 +112,17 @@ message              | Alert message text
 action_loc_key       | Alert button text
 title                | Subject line
 subtitle             | Below the subject
-long_message         | HTML message content
-                     | (also in preview if `long_message_preview` is not set)
+long_message         | HTML message content (also in preview if `long_message_preview` is not set)
 long_message_preview | Preview text
 run_command          | URL to open on `action_loc_key` button
 silent               | No alert window, just increase badge number
 message_level        | Importance, `-2` to `2`
-sound                | Alert sound ID,
-                     | see https://gist.github.com/penso/1217045
+sound                | Alert sound ID, see <https://gist.github.com/penso/1217045>
 icon_url             | Notification icon URL
 
 
-notifications ( callback )
--------------
+### notifications
+**( callback )**
 
 Get a list (array) of notifications from the server.
 
@@ -163,8 +157,8 @@ faast.notifications (console.log);
 ```
 
 
-feeds ( callback )
------
+### feeds
+**( callback )**
 
 Get a list (array) of subscribed RSS feeds.
 
@@ -172,7 +166,7 @@ Get a list (array) of subscribed RSS feeds.
 faast.feeds (console.log);
 ```
 
-Output:
+#### Output:
 
 ```js
 [
@@ -197,8 +191,8 @@ Output:
 ```
 
 
-settings ( callback )
---------
+### settings
+**( callback )**
 
 The user account details and settings.
 
@@ -219,39 +213,6 @@ faast.settings (console.log);
   facebook_sound: ''
 }
 ```
-
-
-Development
------------
-
-[![Circle CI](https://circleci.com/gh/fvdm/nodejs-push/tree/develop.svg?style=svg)](https://circleci.com/gh/fvdm/nodejs-push/tree/develop)
-
-There are two main branches in the repository.
-`master` is equal to the stable release on [npm](https://www.npmjs.com/package/push-node),
-while `develop` is the active development branch.
-
-You can install and use the latest development version with npm:
-
-`npm install fvdm/nodejs-push#develop`
-
-* When submitting a Pull Request please make sure to not use the master branch.
-* Also please use the same code style as the rest of this module.
-* Test your changes, see [Testing](#testing) below.
-
-[Github repository](https://github.com/fvdm/nodejs-push) | [Issues](https://github.com/fvdm/nodejs-push/issues)
-
-
-#### Testing:
-
-```sh
-nvm install stable
-git clone https://github.com/fvdm/nodejs-push -b develop
-cd nodejs-push
-export FAAST_TOKEN=Your_Token npm test
-```
-
-* [nvm](https://github.com/creationix/nvm)
-* [Faast token](https://api.faast.io/account/api_token)
 
 
 Unlicense
