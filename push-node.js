@@ -13,7 +13,7 @@ var httpreq = require ('httpreq');
 var config = {
   token: null,
   timeout: 5000,
-  tlsVerify: true,
+  tlsVerify: true
 };
 
 
