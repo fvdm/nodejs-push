@@ -50,8 +50,6 @@ dotest.add ('API error', function (test) {
     test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'API error')
-      .isObject ('fail', 'err.request', err && err.request)
-      .isString ('fail', 'err.requestBody', err && err.requestBody)
       .isUndefined ('fail', 'data', data)
       .done ();
   });
