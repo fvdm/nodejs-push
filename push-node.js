@@ -47,7 +47,7 @@ function processResponse (err, res, callback) {
 
   if (res.statusCode >= 300) {
     error = new Error ('API error');
-    error.code = response.statusCode;
+    error.code = res.statusCode;
     error.body = data;
     callback (error);
     return;
