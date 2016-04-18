@@ -64,7 +64,6 @@ dotest.add ('Method .settings', function (test) {
       .isObject ('fail', 'data', data)
       .isString ('fail', 'data.email', data && data.email)
       .done ();
-    }
   });
 });
 
