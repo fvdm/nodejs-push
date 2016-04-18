@@ -8,115 +8,66 @@ License:      Public Domain / Unlicense
               (https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE)
 */
 
-var util = require ('util');
+var dotest = require ('dotest');
+var app = require ('./');
+
 
 // Setup
 // set env FAAST_TOKEN (Travis CI)
-var token = process.env.FAAST_TOKEN || null;
+var token = process.env.FAAST_TOKEN || null; fu
+var faast = app (token);
 
-var faast = require ('./') (token);
 
-// handle exits
-var errors = 0;
-process.on ('exit', function () {
-  if (errors === 0) {
-    console.log ('\n\033[1mDONE, no errors.\033[0m\n');
-    process.exit (0);
+// Module
+dotest.add ('Module', function (test) {
+  test ()
+    .isFunction ('fail', 'exports', app)
+    .isObject ('fail', 'interface', faast)
+    .isFunction ('fail', '.settings', faast && faast.settings)
+    .isFunction ('fail', '.notify', faast && faast.notify)
+    .isFunction ('fail', '.notifications', faast && faast.notifications)
+    .isFunction ('fail', '.feeds', faast && faast.feeds)
+    .done ();
+});
+
+// API access
+dotest.add ('API access', function (test) {
+  if (!token) {
+    dotest.log ('fail', 'FAAST_TOKEN not set');
+    dotest.exit ();
   } else {
-    console.log ('\n\033[1mFAIL, '+ errors +' error'+ (errors > 1 ? 's' : '') +' occurred!\033[0m\n');
-    process.exit (1);
+    test ()
+      .good ('FAAST_TOKEN is set')
+      .done ();
   }
 });
 
-// prevent errors from killing the process
-process.on ('uncaughtException', function (err) {
-  console.log ();
-  console.error (err.stack);
-  console.trace ();
-  console.log ();
-  errors++;
-});
-
-// Queue to prevent flooding
-var queue = [];
-var next = 0;
-
-function doNext () {
-  next++;
-  if (queue [next]) {
-    queue [next] ();
-  }
-}
-
-// doTest( passErr, 'methods', [
-//   ['feeds', typeof feeds === 'object']
-// ])
-function doTest (err, label, tests) {
-  if (err instanceof Error) {
-    console.error (label +': \033[1m\033[31mERROR\033[0m\n');
-    console.error (util.inspect (err, false, 10, true));
-    console.log ();
-    console.error (err.stack);
-    console.log ();
-    errors++;
-  } else {
-    var testErrors = [];
-    tests.forEach (function (test) {
-      if (test[1] !== true) {
-        testErrors.push (test [0]);
-        errors++;
-      }
-    });
-
-    if (testErrors.length === 0) {
-      console.log (label +': \033[1m\033[32mok\033[0m');
-    } else {
-      console.error (label +': \033[1m\033[31mfailed\033[0m ('+ testErrors.join (', ') +')');
-    }
-  }
-
-  doNext ();
-}
-
-// First check API access
-queue.push (function () {
-  faast.settings (function (err, data) {
-    if (err) {
-      console.log ('API access: failed ('+ err.message +')');
-      console.log ();
-      console.log (err);
-      console.log ();
-      console.log (err.stack);
-      errors++;
-      process.exit (1);
-    } else {
-      console.log ('API access: \033[1m\033[32mok\033[0m');
-
-      // ! settings
-      doTest (err, 'settings', [
-        ['type', data instanceof Object],
-        ['property', typeof data.email === 'string']
-      ]);
-
-      doNext ();
-    }
-  });
-});
-
-// ! error
-queue.push (function () {
+// error
+dotest.add ('API error', function (test) {
   faast.notify ({}, function (err, data) {
-    doTest (null, 'Error', [
-      ['type', err instanceof Error],
-      ['message', err.message === 'API error'],
-      ['request', typeof err.request === 'object'],
-      ['body', typeof err.requestBody === 'string' || err.requestBody === null]
-    ]);
+    test ()
+      .isError ('fail', 'err', err)
+      .isExactly ('fail', 'err.message', err && err.message, 'API error')
+      .isObject ('fail', 'err.request', err && err.request)
+      .isString ('fail', 'err.requestBody', err && err.requestBody)
+      .isUndefined ('fail', 'data', data)
+      .done ();
   });
 });
 
-// ! notify
-queue.push (function () {
+// settings
+dotest.add ('Method .settings', function (test) {
+  faast.settings (function (err, data) {
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isString ('fail', 'data.email', data && data.email)
+      .done ();
+    }
+  });
+});
+
+// notify
+dotest.add ('Method .notify', function (test) {
   var note = {
     message: 'npm test notify',
     long_message: 'Looks alright so far',
@@ -128,31 +79,31 @@ queue.push (function () {
   };
 
   faast.notify (note, function (err, data) {
-    doTest (err, 'notify', [
-      ['type', data instanceof Object],
-      ['id', typeof data.id === 'number']
-    ]);
+    test (err)
+      .isObject ('fail', 'data', data)
+      .isNumber ('fail', 'data.id', data && data.id)
+      .done ();
   });
 });
 
-// ! feeds
-queue.push (function () {
+// feeds
+dotest.add ('Method .feeds', function (test) {
   faast.feeds (function (err, data) {
-    doTest (err, 'feeds', [
-      ['type', data instanceof Array]
-    ]);
+    test (err)
+      .isArray ('fail', 'data', data)
+      .done ();
   });
 });
 
-// ! notifications
-queue.push (function () {
+// notifications
+dotest.add ('Method .notifications', function (test) {
   faast.notifications (function (err, data) {
-    doTest (err, 'notifications', [
-      ['type', data instanceof Array]
-    ]);
+    test (err)
+      .isArray ('fail', 'data', data)
+      .done ();
   });
 });
 
 
 // Start the tests
-queue [0] ();
+dotest.run ();
