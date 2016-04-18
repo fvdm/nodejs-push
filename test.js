@@ -14,10 +14,13 @@ var app = require ('./');
 
 // Setup
 // set env FAAST_TOKEN (Travis CI)
-var token = process.env.FAAST_TOKEN || null;
-var timeout = process.env.FAAST_TIMEOUT || 5000;
+var config = {
+  token: process.env.FAAST_TOKEN || null,
+  timeout: process.env.FAAST_TIMEOUT || 5000,
+  tlsVerify: process.env.FAAST_TLSVERIFY || true
+};
 
-var faast = app (token, timeout);
+var faast = app (config);
 
 
 // Module
@@ -34,12 +37,14 @@ dotest.add ('Module', function (test) {
 
 // API access
 dotest.add ('API access', function (test) {
-  if (!token) {
+  if (!config.token) {
     dotest.log ('fail', 'FAAST_TOKEN not set');
     dotest.exit ();
   } else {
     test ()
       .good ('FAAST_TOKEN is set')
+      .info ('config.timeout:   ' + config.timeout)
+      .info ('config.tlsVerify: ' + config.tlsVerify)
       .done ();
   }
 });
