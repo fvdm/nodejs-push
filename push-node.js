@@ -139,7 +139,7 @@ function methodNotify (params, callback) {
   var key;
 
   for (key in params) {
-    set ['notification['+ key +']'] = vars [key];
+    set ['notification['+ key +']'] = params [key];
   }
 
   sendRequest ('POST', '/notifications', set, callback);
