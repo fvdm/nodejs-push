@@ -17,7 +17,8 @@
   "main": "push-node.js",
   "dependencies": {},
   "devDependencies": {
-    "dotest": "^1.8.0"
+    "dotest": "^1.8.0",
+    "eslint": "^2.8.0"
   },
   "engines": {
     "node": ">=0.12.0"
@@ -32,6 +33,6 @@
   ],
   "license": "Unlicense",
   "scripts": {
-    "test": "node test.js"
+    "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
   }
 }
