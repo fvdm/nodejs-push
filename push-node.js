@@ -8,155 +8,202 @@ License:      Public Domain / Unlicense
               (https://github.com/fvdm/nodejs-push/raw/master/UNLICENSE)
 */
 
-var https = require ('https');
-var querystring = require ('querystring');
-var app = {};
+var httpreq = require ('httpreq');
 
-
-// ! Defaults
-app.api = {
-  credential: false
+var config = {
+  token: null,
+  timeout: 5000
 };
 
 
-// ! feeds
-app.feeds = function (cb) {
-  talk ('GET', 'account/feeds', function (err, result) {
-    if (err) { return cb (err); }
-    if (result && typeof result.rss_feeds === 'object') {
-      cb (null, result.rss_feeds);
-    } else {
-      cb (null, []);
-    }
-  });
-};
+/**
+ * Process API response
+ *
+ * @callback callback
+ * @param err {Error, null} - Error
+ * @param res {object} - Response details
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
 
-// ! notify
-app.notify = function (vars, cb) {
-  var set = {};
-  var i, key;
-  var keys = Object.keys (vars);
-  for (i = 0; i < keys.length; i++) {
-    key = keys [i];
-    set ['notification['+ key +']'] = vars [key];
-  }
-  talk ('POST', 'notifications', set, cb);
-};
+function processResponse (err, res, callback) {
+  var data = (res && res.body || '') .trim ();
+  var error = null;
 
-// ! notifications
-app.notifications = function (cb) {
-  talk ('GET', 'notifications', function (err, result) {
-    if (!err) {
-      result = result.notifications || result;
-    }
-    cb (err, result);
-  });
-};
-
-// ! settings
-app.settings = function (cb) {
-  talk ('GET', 'account', function (err, result) {
-    if (!err) {
-      result = result.user || result;
-    }
-    cb (err, result);
-  });
-};
-
-
-// ! Communication
-function talk (type, path, fields, cb) {
-  if (!cb && typeof fields === 'function') {
-    var cb = fields;
-    var fields = {};
+  if (err) {
+    error = new Error ('request failed');
+    error.error = err;
+    callback (error);
+    return;
   }
 
-  // prevent multiple callbacks
-  var complete = false;
-  function doCallback (err, data) {
-    if (!complete) {
-      complete = true;
-      cb && cb (err, data || null);
-    }
+  try {
+    data = JSON.parse (data);
+  } catch (e) {
+    error = new Error ('invalid response');
+    callback (error);
+    return;
+  }
+
+  if (res.statusCode >= 300) {
+    error = new Error ('API error');
+    error.code = response.statusCode;
+    error.body = data;
+    callback (error);
+    return;
+  }
+
+  callback (null, data);
+}
+
+
+/**
+ * Send a request to the API
+ *
+ * @callback callback
+ * @param method {string} - GET or POST
+ * @param path {string} - API endpoint path
+ * @param [fields] {object} - Data fields to send along
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function sendRequest (method, path, fields, callback) {
+  if (typeof fields === 'function') {
+    callback = fields;
+    fields = {};
   }
 
   // check credentials
-  if (!app.api.credential) {
-    return doCallback (new Error ('api.credential missing'));
+  if (!config.token) {
+    callback (new Error ('api.credential missing'));
+    return;
   }
 
   // build request
-  var body = null;
-  fields.user_credentials = app.api.credential;
-  path = '/'+ path +'.json';
+  fields.user_credentials = config.token;
 
   var options = {
-    host: 'api.faast.io',
-    port: 443,
-    path: path + (type === 'GET' ? '?'+ querystring.stringify (fields) : ''),
-    method: type,
+    url: 'https://api.faast.io' + path + '.json',
+    method: method,
+    parameters: fields,
+    timeout: config.timeout,
     headers: {
       'Accept': 'application/json',
       'User-Agent': 'push-node.js (https://github.com/fvdm/nodejs-push)'
     }
   };
 
-  if (type === 'POST') {
-    body = querystring.stringify (fields);
-    options.headers ['Content-Type'] = 'application/x-www-form-urlencoded';
-    options.headers ['Content-Length'] = body.length;
-  }
-
-  var req = https.request (options);
-
-  // response
-  req.on ('response', function (response) {
-    var data = '';
-    var error = null;
-
-    response.on ('close', function () {
-      error = new Error ('request closed');
-    });
-
-    response.on ('data', function (chunk) {
-      data += chunk;
-    });
-
-    response.on ('end', function () {
-      data = data.trim ();
-
-      try {
-        data = JSON.parse (data);
-      } catch (e) {
-        error = new Error ('invalid response');
-      }
-
-      if (response.statusCode >= 300) {
-        error = new Error ('API error');
-        error.code = response.statusCode;
-        error.body = data;
-        error.request = options;
-        error.request.path = error.request.path.replace (app.api.credential, '[secure]');
-        error.requestBody = body ? body.replace (app.api.credential, '[secure]') : body;
-      }
-
-      doCallback (error, data);
-    });
+  httpreq.doRequest (options, function (err, res) {
+    processResponse (err, res, callback);
   });
-
-  // error
-  req.on ('error', function (err) {
-    var error = new Error ('request failed');
-    error.error = err;
-    doCallback (err);
-  });
-
-  // done
-  req.end (body);
 }
 
-// ! Setup
-module.exports = function (token) {
-  app.api.credential = token;
-  return app;
+
+/**
+ * Get list of RSS feeds in your account
+ *
+ * @callback callback
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function methodFeeds (callback) {
+  sendRequest ('GET', '/account/feeds', function (err, data) {
+    if (err) {
+      callback (err);
+      return;
+    }
+
+    if (data && typeof data.rss_feeds === 'object') {
+      callback (null, result.rss_feeds);
+      return;
+    }
+
+    callback (null, []);
+  });
+}
+
+
+/**
+ * Send a push notification
+ *
+ * @callback callback
+ * @param params {object} - Notification parameters
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function methodNotify (params, callback) {
+  var set = {};
+  var key;
+
+  for (key in params) {
+    set ['notification['+ key +']'] = vars [key];
+  }
+
+  sendRequest ('POST', '/notifications', set, callback);
+}
+
+
+/**
+ * Get list of notifications in your account
+ *
+ * @callback callback
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function methodNotifications (callback) {
+  sendRequest ('GET', '/notifications', function (err, data) {
+    if (err) {
+      callback (err);
+      return;
+    }
+
+    data = data.notifications || data;
+    callback (null, data);
+  });
+}
+
+
+/**
+ * Get your account settings
+ *
+ * @callback callback
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function methodSettings (callback) {
+  sendRequest ('GET', '/account', function (err, data) {
+    if (err) {
+      callback (err);
+      return;
+    }
+
+    data = data.user || data;
+    callback (null, data);
+  });
+}
+
+
+/**
+ * Configure module
+ *
+ * @param token {string} - Your API access token / credential
+ * @param [timeout] {numbers=5000} - Request time out in ms
+ * @returns {object} - Methods
+ */
+
+module.exports = function (token, timeout) {
+  config.token = token;
+  config.timeout = timeout || 5000;
+
+  return {
+    settings: methodSettings,
+    notify: methodNotify,
+    notifications: methodNotifications,
+    feeds: methodFeeds
+  };
 };
