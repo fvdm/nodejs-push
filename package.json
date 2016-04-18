@@ -16,7 +16,9 @@
   },
   "main": "push-node.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "dotest": "^1.8.0"
+  },
   "engines": {
     "node": ">=0.12.0"
   },
