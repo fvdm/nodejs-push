@@ -116,7 +116,7 @@ function methodFeeds (callback) {
     }
 
     if (data && typeof data.rss_feeds === 'object') {
-      callback (null, result.rss_feeds);
+      callback (null, data.rss_feeds);
       return;
     }
 
