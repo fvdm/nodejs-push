@@ -17,7 +17,7 @@ var app = require ('./');
 var token = process.env.FAAST_TOKEN || null;
 var timeout = process.env.FAAST_TIMEOUT || 5000;
 
-var faast = app (token);
+var faast = app (token, timeout);
 
 
 // Module
